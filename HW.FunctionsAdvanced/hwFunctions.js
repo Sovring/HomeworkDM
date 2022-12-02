@@ -165,13 +165,14 @@ function detonatorTimer(TimeToDetonate) {
 }
 
 function slower(func, seconds) {
-    console.log("Chill out, you will get you result in 5 seconds");
+    let time = seconds * 1000;
+    console.log('Chill out, you will get you result in', seconds, 'seconds');
     return function(...args) {
         setTimeout(function() {
             func.apply(this, args);
-        }, seconds);
+        }, time);
     };
 }
 
-let slowedSomeFunction = slower(detonatorTimer, 4000); 
+let slowedSomeFunction = slower(detonatorTimer, 3); 
 slowedSomeFunction(3); 
