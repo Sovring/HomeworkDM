@@ -9,5 +9,5 @@ let FirstSectionElement = document.querySelector ('section');
 let fifthPunkt = document.getElementsByTagName('li')[4];
 
 
-let hatredLevelBlockElement = document.body.getElementsByClassName('hatredLevelBlock');
+let hatredLevelBlockElement = document.getElementsByClassName('hatredLevelBlock')[0];
 console.log(hatredLevelBlockElement); 
