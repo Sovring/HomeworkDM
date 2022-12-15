@@ -28,6 +28,8 @@ label {
   font-size: 1.25em;
 }
 
+
+
 input, textarea {
   border-radius: 2px;
   border: 2px solid #777;
@@ -37,6 +39,7 @@ input, textarea {
   width: 100%;
   padding: 10px;
 }
+
 
 select {
   border-radius: 2px;
