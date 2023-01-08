@@ -56,6 +56,7 @@ select {
 div.elem-group.inlined input {
   width: 95%;
   display: inline-block;
+  :disabled
 }
 
 textarea {
@@ -83,3 +84,6 @@ button:hover {
 }
 
 
+.resultHistory {
+  padding-left: 70px;
+}

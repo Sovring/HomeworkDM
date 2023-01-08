@@ -14,11 +14,11 @@
   
   <div class="elem-group inlined">
     <label for="checkin-date">Початкова дата</label>
-    <input class= "data-input" type="datetime-local" step=1 id="checkin-date" name="checkin" required>
+    <input class= "data-input" type="date" step=1 id="checkin-date" min="1977-01-01" name="checkin" required>
   </div>
   <div class="elem-group inlined">
     <label for="checkout-date">Кінцева дата</label>
-    <input class= "data-input" type="datetime-local" step=1 min="2017-04-01" id="checkout-date" name="checkout">
+    <input class= "data-input" type="date" step=1 id="checkout-date" max="2030-01-01" name="checkout" disabled>
   </div>
   <div class="elem-group">
     <label for="room-selection">Фільтр</label>
@@ -49,6 +49,17 @@
   <button id= "CalculateButton" type="submit">Розрахувати</button>
 </div>
   <div  id="CalculationHistory" class="elem-group"> 
+        <h2 class="label">Попередні результати</h2>
+           <table class="history">
+              <thead>
+                 <tr>
+                   <th>Проміжок</th>
+                   <th>Результат</th>
+                   </tr>
+               </thead>
+               <tbody> </tbody>
+           </table>
+    </div>
   </div>
   <script  src="./script.js"></script>
 
