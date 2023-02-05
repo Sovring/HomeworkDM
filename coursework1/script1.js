@@ -6,7 +6,7 @@ let CalculationResultStorage = [];
 
 let firstDate = document.getElementById('checkin-date');
 let secondDate = document.getElementById('checkout-date');
-
+let PresetInput = document.getElementById('preset-selection');
 let DataInputs = document.getElementsByClassName("data-input");
 
 firstDate.addEventListener('change', () => {
@@ -17,9 +17,27 @@ secondDate.setAttribute('min', block);
 
 secondDate.addEventListener('change', () => {
 firstDate.setAttribute('max', new Date(secondDate.value).toISOString().split('T')[0]);
+let Preset = document.getElementById('preset-selection').value = '';
 });
 
+PresetInput.addEventListener('change', () => {
+let Preset = document.getElementById('preset-selection').value;
+let FirstDate = new Date(document.getElementById('checkin-date').value);
+let SecondDate = new Date (document.getElementById('checkout-date').value);
+let SecondDateinMs;	
 
+	if (Preset === "Тиждень") {
+			SecondDateinMs = FirstDate.getTime() + Week;
+			SecondDate = new Date(SecondDateinMs);
+			document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
+		} else if (Preset === 'Місяць') {
+			SecondDateinMs = FirstDate.getTime() + Month;
+			SecondDate = new Date(SecondDateinMs);
+			document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
+		} else if (Preset === '') {
+			SecondDate = SecondDate.getTime();
+		}
+});
 
 let CalculateButton = document.getElementById('CalculateButton');
 CalculateButton.addEventListener('click', (click) => { this.CalculationAction(click)});
@@ -31,7 +49,7 @@ function CalculationDaysOfWeek(FirstDate, SecondDate, DaysTypeValue) {
 	let CountedDays = parseInt((durationBetweenDates(FirstDate, SecondDate, 'Порахувати кількість днів' )).split(' ')[0]).toFixed(0);
 	let CountedSelectDays = 0;
 
-	for (let i = 0; i <= CountedDays; i++) {
+	for (let i = 0; i <= CountedDays-1; i++) {
 		let DayOfWeek;
 
 		if (i == 0) {
@@ -56,7 +74,6 @@ function CalculationDaysOfWeek(FirstDate, SecondDate, DaysTypeValue) {
 		} 
 	}
 }
-	console.log(CountedSelectDays);
 	return CountedSelectDays;
 }
 
@@ -82,17 +99,17 @@ function CalculationAction(event) {
 		let SecondDateDay = new Date(SecondDate).toString().slice(0, 3);
 
 
-		if (Preset === "Тиждень") {
-			SecondDateinMs = FirstDate.getTime() + Week;
-			SecondDate = new Date(SecondDateinMs);
-			document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
-		} else if (Preset === 'Місяць') {
-			SecondDateinMs = FirstDate.getTime() + Month;
-			SecondDate = new Date(SecondDateinMs);
-			document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
-		} else if (Preset === '') {
-			SecondDate = SecondDate.getTime();
-		}
+		// if (Preset === "Тиждень") {
+		// 	SecondDateinMs = FirstDate.getTime() + Week;
+		// 	SecondDate = new Date(SecondDateinMs);
+		// 	document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
+		// } else if (Preset === 'Місяць') {
+		// 	SecondDateinMs = FirstDate.getTime() + Month;
+		// 	SecondDate = new Date(SecondDateinMs);
+		// 	document.getElementById('checkout-date').value = SecondDate.toISOString().split('T')[0];
+		// } else if (Preset === '') {
+		// 	SecondDate = SecondDate.getTime();
+		// }
 
 	
 		if (DaysTypeValue === 'Всі дні') {
@@ -107,7 +124,6 @@ function CalculationAction(event) {
 		saveToLocalStorage(FirstDate, SecondDate, CalculationResult);
 		History();
 	}
-	console.log(CalculationResult);
 }	
 
 	
@@ -136,7 +152,6 @@ function CalculateDimension(Dimension, CalculationResult) {
         return CalculationResult;
         break;   
     }
-    console.log(CalculationResult);
 }
 
 //фунція для розрахунку різниці дат
@@ -146,7 +161,7 @@ function durationBetweenDates(FirstDate, SecondDate, Dimension) {
     let SecondDate1 = SecondDate;
     let CalculationResult = 0;
     CalculationResult = Math.abs(FirstDate1 - SecondDate1);
-
+    console.log(CalculationResult);
     return CalculateDimension(Dimension, CalculationResult);
 }
 
